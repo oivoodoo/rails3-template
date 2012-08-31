@@ -1,25 +1,24 @@
-gem 'haml'
-gem 'heroku'
-gem 'sorcery'
-gem 'twitter-bootstrap-rails'
-gem 'deployments'
+require 'net/http'
 
-gem 'pg'
+def get(path)
+  uri = URI.parse(path)
 
-gem 'mysql2'
-gem "rspec-rails", "~> 2.6"
-gem 'factory_girl_rails'
-gem 'ruby_gntp'
-gem 'guard-rspec'
-gem 'guard-cucumber'
-gem 'debugger'
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
 
-gem 'cucumber'
-gem 'cucumber-rails'
-gem 'capybara'
-gem 'capybara-webkit'
-gem 'database_cleaner'
-gem 'timecop'
-gem 'shoulda'
-gem 'launchy'
+  http.start do
+    http.request_get(uri.path) do |response|
+      return response.body
+    end
+  end
+end
+
+def copy(path, filename)
+  create_file(filename) do
+    get(path)
+  end
+end
+
+
+copy('https://raw.github.com/oivoodoo/rails3-template/master/Gemfile', 'Gemfile')
 
