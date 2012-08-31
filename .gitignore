@@ -1,0 +1,10 @@
+.bundle
+log/*.log
+tmp/
+.sass-cache/
+public/stylesheets/*
+vendor/bundle/
+config/database.yml
+config/deployments.yml
+public/version.txt
+

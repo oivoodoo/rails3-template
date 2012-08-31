@@ -1,0 +1,6 @@
+options:
+  server: "http://deployments-app.herokuapp.com/deployments"
+production:
+  domain: "your application domain"
+  api_key: "your api key"
+
